@@ -7,7 +7,9 @@
 	width: 1024px;
 	height: 768px;
 	left: 0;
+  right: 0;
 	top: 0;
+  margin: 0 auto;
   background-color: #fff;
 }
 #playButton.hidden {
@@ -47,30 +49,4 @@ main {
 }
 main.active {
   visibility: visible;
-}
-
-aside {
-  width: 250px;
-  background: dodgerblue;
-  position: absolute;
-  left: 0;
-  top: 0;
-  line-height: 150%;
-  transform: translateX(-200px);
-  transition: all 0.4s;
-  z-index: 100;
-  &:active {
-    background: gold;
-    transform: translateX(0px);
-  }
-}
-
-.credits {
-  position: absolute;
-  left: 20px;
-  top: 660px;
-  z-index: 2;
-  div {
-    margin-bottom: 5px;
-  }
 }

@@ -1,5 +1,28 @@
 (function() {
     'use strict';
+
+    /* ***************************** LOADER handle begin ***********************************************/
+  var now = new Date().getTime();
+  var page_load_time = now - performance.timing.navigationStart;
+  console.warn("User-perceived page loading time: " + page_load_time);
+  var width = 100,
+    perfData = window.performance.timing,
+    EstimatedTime = -(perfData.loadEventEnd - perfData.navigationStart),
+    time = parseInt((EstimatedTime/1000)%60)*100;
+    console.log("estimated time: ", time)
+  $('.loadbar').animate({
+    'width': width+'%'
+  }, time)
+  /******************************** loader handle end *************************************************/
+  function preloaderTimeout() {
+    let dfd = $.Deferred();
+    console.warn("temporary")
+    setTimeout(()=>{
+      dfd.resolve('preloader timeout passed')
+    }, time)
+    return dfd.promise();
+  }
+
     let audioLoadedNum = 0;
     let audioPlayer;
     let audioFiles = [
@@ -100,7 +123,7 @@
   }
 
   function loadLabels(onfnvar) {
-    $('section.intro p').html("Select all but wheelbarrows")
+    $('section.intro p').html("Select everything else but wheelbarrows")
     $('section.gratulation.correct p').html("temporary section.gratulation.correct label")
     $('section.gratulation.mistake p').html("temporary section.gratulation.mistake label")
     $('#gameStart p').html("START")
@@ -144,6 +167,7 @@
     if (audioLoadedNum === numOfAudioFiles) {
       console.log('%csounds ready', 'background: green; color:  white');
       $(playButton).removeClass('hidden');
+      $('.preloader-wrapper').removeClass('active')
     }
   };
 
